@@ -1,1 +1,1 @@
-These are some JS Exercises.  Why doesn't lodash sort the cities properly in city.js?
+These are some JS exercises.

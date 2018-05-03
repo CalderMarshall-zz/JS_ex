@@ -59,11 +59,34 @@ cities.push(new City("39", "Atlanta", "Georgia", "456,002", "420,003", "+8.57%",
 
 
 cityByLastCensus = _.orderBy(cities, [{'lastCensus': Number}], ['desc']);
+var avgSum = 0;
+var avgChangeAndLand = 0;
+var landAreaAndChangeWinner = null;
 cities.forEach(function(e){
-    console.log("first", e.lastCensus)
+    // console.log("first", e.latLon);
+    latLonArray = e.latLon.split(",");
+    // console.log("second", e.latLon);
+    e.lat = Number(latLonArray[0]);
+    e.lon = Number(latLonArray[1]);
+    // console.log("third", "lat: ", e.lat, "long: ", e.lon);
+    changeNumString = e.change.slice(1, 5);
+    // console.log("1111",changeNumString);
+    changeNum = parseFloat(changeNumString);
+    landNum = e.landArea.slice(0, 4);
+    // console.log("22222",changeNum);
+    avgSum += changeNum;
+    newAvgChangeAndLand = (changeNum + landNum) / 2;
+    if (newAvgChangeAndLand > avgChangeAndLand){
+        avgChangeAndLand = newAvgChangeAndLand;
+        landAreaAndChangeWinner = e.city + "," + e.state
+    }
+    // console.log("333333", avgSum);
 });
 
 cityByLastCensus.forEach(function(e){
-    console.log("second", e.lastCensus)
+    console.log("sort by last census", e.lastCensus)
 });
-
+const averageChange = avgSum / cities.length;
+console.log("look at this split into lat lon", cities[9]);
+console.log("average population change",averageChange.toFixed(2),"%");
+console.log("Average of both land Area and Change Winner", landAreaAndChangeWinner);
