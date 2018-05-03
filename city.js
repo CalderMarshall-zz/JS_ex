@@ -58,7 +58,7 @@ cities.push(new City("39", "Atlanta", "Georgia", "456,002", "420,003", "+8.57%",
 
 
 
-cityByLastCensus = _.orderBy(cities, ['lastCensus'], ['desc']);
+cityByLastCensus = _.orderBy(cities, [{'lastCensus': Number}], ['desc']);
 cities.forEach(function(e){
     console.log("first", e.lastCensus)
 });
